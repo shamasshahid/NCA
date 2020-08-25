@@ -26,9 +26,3 @@ struct QuizItem: Codable {
     }
 }
 
-enum Section: String, Codable {
-    case business = "business"
-    case entertainment = "entertainment"
-    case lifestyle = "lifestyle"
-    case sport = "sport"
-}

@@ -18,7 +18,6 @@ class QuizViewModel {
     
     private let dependencyProvider: NetworkDependencies
     private var currentIndex: Int = 0
-    private let itemViewModel = QuizItemViewModel()
     private let scoreKeeper = ScoreKeeper()
     private var wasLastResponseCorrect: Bool = false
     private var dataFetchState: DataFetchState = .isFetching {
@@ -29,7 +28,10 @@ class QuizViewModel {
     
     private var quizData: [QuizItem] = [] {
         didSet {
-            itemViewModel.setQuizItem(item: quizData[currentIndex])
+            if let question = getItemForCurrentIndex() {
+                onQuestionSet?(question)
+            }
+            
         }
     }
     
@@ -37,43 +39,38 @@ class QuizViewModel {
     var onProgressUpdated: ((Float) -> Void)?
     var onShowResult: (() -> Void)?
     var onDataFetchStateChanged: ((DataFetchState) -> Void)?
+    var onQuestionSet: ((QuizItem) -> Void)?
     
     init(provider: NetworkDependencies) {
         dependencyProvider = provider
-        setupQuizItemViewModel()
-    }
-    
-    func setupQuizItemViewModel() {
-        
-        itemViewModel.onUserChoseAnswer = { [weak self] isCorrect in
-            guard let self = self else {
-                return
-            }
-            
-            self.updateScoreForAnswer(isCorrect: isCorrect)
-//            self.setNextQuestionIfAvailable()
-        }
     }
     
     func updateScoreForAnswer(isCorrect: Bool) {
         wasLastResponseCorrect = isCorrect
         scoreKeeper.answerSelected(isCorrect: isCorrect)
         onScoreUpdated?("\(scoreKeeper.score)")
-        onProgressUpdated?( Float(currentIndex) / Float(quizData.count))
+        onProgressUpdated?(getCurrentProgress())
         onShowResult?()
+    }
+    
+    private func getCurrentProgress() -> Float {
+        guard quizData.count > 0 else {
+            return 0
+        }
+        return Float(currentIndex) / Float(quizData.count)
     }
     
     func setNextQuestionIfAvailable() {
         currentIndex += 1
-        guard currentIndex < quizData.count else {
+        guard let question = getItemForCurrentIndex() else {
             // handle end of game
             return
         }
         
-        itemViewModel.setQuizItem(item: quizData[currentIndex])
+        onQuestionSet?(question)
     }
     
-    func requestQuizData() {
+    func loadQuizData() {
         dataFetchState = .isFetching
         let service = dependencyProvider.getService()
         let router = dependencyProvider.getRoutable()
@@ -92,14 +89,21 @@ class QuizViewModel {
         setNextQuestionIfAvailable()
     }
     
-    func getQuizItemViewModel() -> QuizItemViewModel {
-        
-        return itemViewModel
+    private func getItemForCurrentIndex() -> QuizItem? {
+        guard currentIndex >= 0 && currentIndex < quizData.count else {
+            return nil
+        }
+        return quizData[currentIndex]
     }
     
-    func getResultViweModel() -> ResultViewModel {
+    
+    func getResultViewModel() -> ResultViewModel? {
         
-        let viewModel = ResultViewModel(item: quizData[currentIndex], isCorrect: wasLastResponseCorrect)
+        guard let question = getItemForCurrentIndex() else {
+            return nil
+        }
+        
+        let viewModel = ResultViewModel(item: question, isCorrect: wasLastResponseCorrect)
         viewModel.onNextQuestion = { [weak self] in
             self?.setNextQuestionIfAvailable()
         }

@@ -30,29 +30,8 @@ class QuizViewController: UIViewController {
         setupViewModel()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupQuizItemView()
-        setupFirstLoadUI()
-        viewModel.requestQuizData()
-    }
-    
-    func setupFirstLoadUI() {
-        scoreLabel.text = String(format: scoreMessge, "0")
-        
-        skipButton.layer.cornerRadius = 5
-        skipButton.clipsToBounds = true
-    }
-
-    @IBAction func retryButtonTapped(_ sender: UIButton) {
-        viewModel.requestQuizData()
-    }
-    
-    @IBAction func skipButtonTapped(_ sender: UIButton) {
-        viewModel.skipRequested()
-    }
     func setupViewModel() {
-        viewModel = QuizViewModel(provider: NetworkDependencyProvider())
+        viewModel = DependencyProvider.getQuizViewModel()
         viewModel.onScoreUpdated = { [weak self]  score in
             guard let self = self else {
                 return
@@ -79,6 +58,39 @@ class QuizViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupQuizItemView()
+        setupFirstLoadUI()
+        viewModel.loadQuizData()
+    }
+    
+    func setupQuizItemView() {
+        
+        if let vc = DependencyProvider.getQuestionViewController() {
+            addChildViewController(view: containerView, childVC: vc)
+            
+            vc.viewModel.onUserChoseAnswer = viewModel.updateScoreForAnswer(isCorrect: )
+            viewModel.onQuestionSet = vc.viewModel.setQuizItem(item: )
+        }
+    }
+    
+    func setupFirstLoadUI() {
+        scoreLabel.text = String(format: scoreMessge, "0")
+        
+        skipButton.layer.cornerRadius = 5
+        skipButton.clipsToBounds = true
+    }
+
+    
+    @IBAction func retryButtonTapped(_ sender: UIButton) {
+        viewModel.loadQuizData()
+    }
+    
+    @IBAction func skipButtonTapped(_ sender: UIButton) {
+        viewModel.skipRequested()
+    }
+    
     func updateViewForDataFetchState(state: DataFetchState) {
         switch state {
         case .isFetching:
@@ -103,24 +115,11 @@ class QuizViewController: UIViewController {
         self.performSegue(withIdentifier: resultSegue, sender: nil)
     }
     
-    func setupQuizItemView() {
-        
-        if let vc = getUIViewControllerForID(identifier: QuizItemViewController.storyboardIdentifier) as? QuizItemViewController {
-            addChildViewController(view: containerView, childVC: vc)
-            
-            vc.viewModel = viewModel.getQuizItemViewModel()
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let resultVC = segue.destination as? ResultViewController {
-            resultVC.viewModel = viewModel.getResultViweModel()
+            resultVC.viewModel = viewModel.getResultViewModel()
         }
     }
 
-    func getUIViewControllerForID(identifier: String) -> UIViewController? {
-        let sb = UIStoryboard(name: "Main", bundle: Bundle(for: QuizItemViewController.self))
-        return sb.instantiateViewController(identifier: identifier)
-    }
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class QuizItemViewController: UIViewController {
+class QuestionViewController: UIViewController {
 
     static let storyboardIdentifier = "QuizItemViewController"
     

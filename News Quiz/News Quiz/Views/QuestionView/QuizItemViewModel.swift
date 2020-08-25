@@ -8,14 +8,14 @@
 
 import Foundation
 
-class QuizItemViewModel {
+class QuestionViewModel {
     
     private var quizItem: QuizItem? {
         didSet {
             onViewRefreshed?()
         }
     }
-    var onViewRefreshed: (() -> Void)?
+    var onViewRefreshed: (() -> Void)? //TODO rename on Item/question updated
     var onUserChoseAnswer: ((Bool) -> Void)?
     
     func setQuizItem(item: QuizItem) {

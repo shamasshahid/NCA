@@ -14,7 +14,8 @@ class ResultViewController: UIViewController {
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var quizImageView: UIImageView!
-    @IBOutlet weak var quizHeadline: UILabel!
+    @IBOutlet weak var headlineTextView: UITextView!
+    @IBOutlet weak var nextQuestionButton: UIButton!
     
     var viewModel: ResultViewModel!
     
@@ -26,9 +27,14 @@ class ResultViewController: UIViewController {
     func setupUI() {
         
         resultLabel.text = viewModel.getResultLabelMessage()
+        resultLabel.layer.cornerRadius = 5
+        resultLabel.clipsToBounds = true
         resultLabel.backgroundColor = viewModel.isCorrect ? UIColor.green : UIColor.red
         
-        quizHeadline.text = viewModel.getQuizHeadline()
+        nextQuestionButton.layer.cornerRadius = 5
+        nextQuestionButton.clipsToBounds = true
+        
+        headlineTextView.text = viewModel.getQuizHeadline()
         
         quizImageView.kf.setImage(with: viewModel.getImageURL())
     }
