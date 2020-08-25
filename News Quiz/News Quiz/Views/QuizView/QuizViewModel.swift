@@ -57,10 +57,10 @@ class QuizViewModel {
         guard quizData.count > 0 else {
             return 0
         }
-        return Float(currentIndex) / Float(quizData.count)
+        return Float(currentIndex + 1) / Float(quizData.count)
     }
     
-    func setNextQuestionIfAvailable() {
+    private func setNextQuestionIfAvailable() {
         currentIndex += 1
         guard let question = getItemForCurrentIndex() else {
             // handle end of game
@@ -87,6 +87,7 @@ class QuizViewModel {
     
     func skipRequested() {
         setNextQuestionIfAvailable()
+        onProgressUpdated?(getCurrentProgress())
     }
     
     private func getItemForCurrentIndex() -> QuizItem? {
