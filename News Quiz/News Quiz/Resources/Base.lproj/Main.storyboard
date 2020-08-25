@@ -73,7 +73,7 @@
                         <outlet property="containerView" destination="Jyh-i4-KrK" id="G2V-WJ-VCh"/>
                         <outlet property="progressBar" destination="AKY-6l-xRA" id="W3J-r2-Rhz"/>
                         <outlet property="scoreLabel" destination="btc-m4-bPw" id="UmK-30-tsN"/>
-                        <segue destination="UUB-SF-bER" kind="modal" identifier="resultIdentifier" modalPresentationStyle="fullScreen" id="q9x-kd-D67"/>
+                        <segue destination="UUB-SF-bER" kind="presentation" identifier="resultIdentifier" modalPresentationStyle="fullScreen" id="q9x-kd-D67"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -168,21 +168,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pjR-su-ro5">
-                                <rect key="frame" x="20" y="112" width="374" height="546"/>
+                                <rect key="frame" x="20" y="112" width="374" height="526"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3H2-Hb-6h8">
-                                <rect key="frame" x="274" y="774" width="120" height="40"/>
+                                <rect key="frame" x="274" y="754" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="kas-9v-Vwl"/>
                                     <constraint firstAttribute="height" constant="40" id="zBi-C3-AQb"/>
                                 </constraints>
                                 <state key="normal" title="Read Article&gt;"/>
                                 <connections>
-                                    <action selector="readArticleTapped:" destination="UUB-SF-bER" eventType="touchUpInside" id="EZV-A8-wpC"/>
+                                    <segue destination="tpY-nh-2rV" kind="popoverPresentation" popoverAnchorView="3H2-Hb-6h8" id="QjS-qx-Ixv">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ae-F7-ria">
-                                <rect key="frame" x="20" y="822" width="374" height="40"/>
+                                <rect key="frame" x="20" y="802" width="374" height="40"/>
                                 <color key="backgroundColor" red="0.47468635790000002" green="0.73725091529999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NyF-7q-UkU"/>
@@ -196,7 +198,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Os2-ru-1ig">
-                                <rect key="frame" x="20" y="666" width="374" height="100"/>
+                                <rect key="frame" x="20" y="646" width="374" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Q0m-Td-nEb"/>
                                 </constraints>
@@ -208,7 +210,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="vwZ-ra-fIb" firstAttribute="top" secondItem="553-CU-ZuH" secondAttribute="top" constant="20" id="1IY-ze-DTn"/>
-                            <constraint firstItem="1Ae-F7-ria" firstAttribute="bottom" secondItem="553-CU-ZuH" secondAttribute="bottom" id="3XO-dm-go1"/>
+                            <constraint firstItem="1Ae-F7-ria" firstAttribute="bottom" secondItem="553-CU-ZuH" secondAttribute="bottom" constant="-20" id="3XO-dm-go1"/>
                             <constraint firstItem="1Ae-F7-ria" firstAttribute="top" secondItem="3H2-Hb-6h8" secondAttribute="bottom" constant="8" id="809-eg-MW5"/>
                             <constraint firstItem="Os2-ru-1ig" firstAttribute="leading" secondItem="553-CU-ZuH" secondAttribute="leading" constant="20" id="Cg3-eR-fqF"/>
                             <constraint firstItem="Os2-ru-1ig" firstAttribute="top" secondItem="pjR-su-ro5" secondAttribute="bottom" constant="8" id="CiH-rn-hDW"/>
@@ -234,7 +236,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Znh-qR-Bum" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="999" y="353"/>
+            <point key="canvasLocation" x="1170" y="353"/>
+        </scene>
+        <!--News Article View Controller-->
+        <scene sceneID="Rfn-WN-efI">
+            <objects>
+                <viewController id="tpY-nh-2rV" customClass="NewsArticleViewController" customModule="News_Quiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oIL-lH-dlG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahO-eW-Vqp">
+                                <rect key="frame" x="0.0" y="58" width="414" height="764"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6q-z7-nNa">
+                                <rect key="frame" x="20" y="20" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="tpY-nh-2rV" eventType="touchUpInside" id="m1x-9V-awg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ahO-eW-Vqp" firstAttribute="top" secondItem="U6q-z7-nNa" secondAttribute="bottom" constant="8" id="C7E-do-qYa"/>
+                            <constraint firstItem="ozm-PJ-NGP" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="U6q-z7-nNa" secondAttribute="trailing" constant="20" id="Glj-1t-wvF"/>
+                            <constraint firstItem="U6q-z7-nNa" firstAttribute="top" secondItem="ozm-PJ-NGP" secondAttribute="top" constant="20" id="dSI-Vy-KEy"/>
+                            <constraint firstItem="ahO-eW-Vqp" firstAttribute="trailing" secondItem="ozm-PJ-NGP" secondAttribute="trailing" id="hgn-4j-ZMQ"/>
+                            <constraint firstItem="U6q-z7-nNa" firstAttribute="leading" secondItem="ozm-PJ-NGP" secondAttribute="leading" constant="20" id="iZG-g4-q5o"/>
+                            <constraint firstItem="ahO-eW-Vqp" firstAttribute="leading" secondItem="ozm-PJ-NGP" secondAttribute="leading" id="jdz-uI-HV2"/>
+                            <constraint firstAttribute="bottom" secondItem="ahO-eW-Vqp" secondAttribute="bottom" constant="20" id="k9a-T6-hMS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ozm-PJ-NGP"/>
+                    </view>
+                    <connections>
+                        <outlet property="wkWebView" destination="ahO-eW-Vqp" id="VG0-SA-1Yc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jYc-mA-0ba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2102.898550724638" y="352.90178571428572"/>
         </scene>
     </scenes>
 </document>

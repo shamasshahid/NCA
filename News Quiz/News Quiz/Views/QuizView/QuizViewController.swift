@@ -58,9 +58,7 @@ class QuizViewController: UIViewController {
     func setupQuizItemView() {
         
         if let vc = getUIViewControllerForID(identifier: QuizItemViewController.storyboardIdentifier) as? QuizItemViewController {
-            containerView.addSubview(vc.view)
-            addChild(vc)
-            vc.didMove(toParent: self)
+            addChildViewController(view: containerView, childVC: vc)
             
             vc.viewModel = viewModel.getQuizItemViewModel()
         }

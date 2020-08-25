@@ -84,6 +84,9 @@ class QuizViewModel {
     func getResultViweModel() -> ResultViewModel {
         
         let viewModel = ResultViewModel(item: quizData[currentIndex], isCorrect: wasLastResponseCorrect)
+        viewModel.onNextQuestion = { [weak self] in
+            self?.setNextQuestionIfAvailable()
+        }
         return viewModel
     }
     
