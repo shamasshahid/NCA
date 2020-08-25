@@ -11,7 +11,6 @@ import Foundation
 /// Implements Routable protocol and is used to get the urlRequest
 struct BaseRouter: Routable {
     
-//    https://firebasestorage.googleapis.com/v0/b/nca-dna-apps-dev.appspot.com/o/game.json?alt=media&token=e36c1a14-25d9-4467-8383-a53f57ba6bfe
     var methodType: HTTPType {
         return .GET
     }
@@ -20,7 +19,6 @@ struct BaseRouter: Routable {
         return .https
     }
     
-    // perhaps can be moved to info.plist
     var baseURL: String {
         return "firebasestorage.googleapis.com"
     }
