@@ -28,6 +28,19 @@ class QuizItemViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+    }
+    
+    func setupView() {
+        [answerButton1, answerButton2, answerButton3].forEach { button in
+            button?.titleLabel?.textAlignment = .center
+            button?.layer.cornerRadius = 5
+            button?.clipsToBounds = true
+        }
+    }
+    
     func setupViewModel() {
         
         viewModel.onViewRefreshed = { [weak self] in
@@ -40,22 +53,8 @@ class QuizItemViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func answerButtonTapped(_ sender: UIButton) {
         viewModel.userSelectedAnswerIndex(index: sender.tag)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

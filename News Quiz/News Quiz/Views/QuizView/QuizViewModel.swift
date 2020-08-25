@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum DataFetchState {
+    case isFetching
+    case isSuccessful
+    case isFailed
+}
+
 class QuizViewModel {
     
     private let dependencyProvider: NetworkDependencies
@@ -15,6 +21,11 @@ class QuizViewModel {
     private let itemViewModel = QuizItemViewModel()
     private let scoreKeeper = ScoreKeeper()
     private var wasLastResponseCorrect: Bool = false
+    private var dataFetchState: DataFetchState = .isFetching {
+        didSet {
+            onDataFetchStateChanged?(dataFetchState)
+        }
+    }
     
     private var quizData: [QuizItem] = [] {
         didSet {
@@ -25,10 +36,10 @@ class QuizViewModel {
     var onScoreUpdated: ((String) -> Void)?
     var onProgressUpdated: ((Float) -> Void)?
     var onShowResult: (() -> Void)?
+    var onDataFetchStateChanged: ((DataFetchState) -> Void)?
     
     init(provider: NetworkDependencies) {
         dependencyProvider = provider
-        makeNetworkCall()
         setupQuizItemViewModel()
     }
     
@@ -62,18 +73,23 @@ class QuizViewModel {
         itemViewModel.setQuizItem(item: quizData[currentIndex])
     }
     
-    func makeNetworkCall() {
+    func requestQuizData() {
+        dataFetchState = .isFetching
         let service = dependencyProvider.getService()
         let router = dependencyProvider.getRoutable()
         service.fetch(urlRequest: router) {[weak self] (result) in
             switch result {
             case .success(let response):
-                print("result fetched:\(response.items.count)")
+                self?.dataFetchState = .isSuccessful
                 self?.quizData = response.items
-            case .failure(let error):
-                print("error is:\(error)")
+            case .failure(_):
+                self?.dataFetchState = .isFailed
             }
         }
+    }
+    
+    func skipRequested() {
+        setNextQuestionIfAvailable()
     }
     
     func getQuizItemViewModel() -> QuizItemViewModel {
