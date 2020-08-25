@@ -1,0 +1,43 @@
+{
+  "product": "Daily Buzz",
+  "resultSize": 615,
+  "version": 1,
+  "items": [
+    {
+      "correctAnswerIndex": 2,
+      "imageUrl": "http://news-innovation.s3.amazonaws.com/matcha/20150105/d6a7bac9beaefea3120a8fee51eaca29.jpg",
+      "standFirst": "PREMIER League leaders Chelsea were held to a 1-1 draw by Southampton, but retained their lead at the top after Manchester City also dropped points. PREMIER League leaders Chelsea were held to a 1-1 draw by Southampton, but retained their lead at the top after Manchester City also dropped points. PREMIER League leaders Chelsea were held to a 1-1 draw by Southampton, but retained their lead at the top after Manchester City also dropped points.",
+      "storyUrl": "http://www.dailytelegraph.com.au/sport/football/barclays-premier-league-leaders-chelsea-held-to-1-1-draw-by-top-four-contenders-southampton/story-fnk5e6j5-1227168894043?sv=4cb49dd02de058ab862ac225a8e18fd5",
+      "section": "sport",
+      "headlines": [
+        "Munce Intent on reversing result in grand final",
+        "Socceroos to dribble in after Xmas exertions",
+        "Stubborn Southampton frustrate Chelsea"
+      ]
+    },
+    {
+      "correctAnswerIndex": 0,
+      "imageUrl": "http://news-innovation.s3.amazonaws.com/matcha/20150105/fb4f8fabb6b44f73b7e5b3d7de52ca22.jpg",
+      "standFirst": "A 19-YEAR-OLD was having a cancerous growth removed from her brain when, mid-surgery, the anaesthetic wore off.",
+      "storyUrl": "http://www.dailytelegraph.com.au/lifestyle/health/teen-iga-jasica-wakes-up-during-brain-surgery-asks-how-its-going/story-fni0diab-1227174032899?sv=e5b31f8263e81d8358794ea38e0d0514",
+      "section": "lifestyle",
+      "headlines": [
+        "Teen wakes, talks during brain surgery",
+        "Killer hubby: Why I took wife’s life",
+        "‘My life with two penises’"
+      ]
+    },
+    {
+      "correctAnswerIndex": 2,
+      "imageUrl": "http://news-innovation.s3.amazonaws.com/matcha/20150105/9a5632441fb2755ec2161e081e316294.jpg",
+      "standFirst": "IF India can stay committed to their new “gung-ho” Test game plan, it could be the best news the sport has had for years.",
+      "storyUrl": "http://www.dailytelegraph.com.au/sport/cricket/australia-v-india-tourists-in-attack-mode-to-avoid-being-cannon-fodder-for-dominant-hosts/story-fnp050m0-1227157329672?sv=523ac90e8333fa99df3a3209fee54df6",
+      "section": "sport",
+      "headlines": [
+        "League legend urges son to seek help",
+        "ASADA’s three-day opening salvo",
+        "India in attack mode to avoid being cannon fodder"
+      ]
+    }
+  ]
+}
