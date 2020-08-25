@@ -20,6 +20,7 @@
 		060E9B9824F492D900D9A59B /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9724F492D900D9A59B /* WebService.swift */; };
 		060E9B9A24F4930500D9A59B /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9924F4930500D9A59B /* BaseRouter.swift */; };
 		060E9B9C24F4938F00D9A59B /* QuizDataFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9B24F4938F00D9A59B /* QuizDataFetchService.swift */; };
+		060E9B9F24F4964100D9A59B /* NetworkDependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9E24F4964100D9A59B /* NetworkDependencyProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		060E9B9724F492D900D9A59B /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		060E9B9924F4930500D9A59B /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		060E9B9B24F4938F00D9A59B /* QuizDataFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataFetchService.swift; sourceTree = "<group>"; };
+		060E9B9E24F4964100D9A59B /* NetworkDependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDependencyProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		060E9B8E24F490F800D9A59B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				060E9B9D24F4961B00D9A59B /* Network Dependency Provider */,
 				060E9B9524F492BC00D9A59B /* Routable.swift */,
 				060E9B9724F492D900D9A59B /* WebService.swift */,
 				060E9B9924F4930500D9A59B /* BaseRouter.swift */,
@@ -147,6 +150,14 @@
 				060E9B9324F491D200D9A59B /* QuizItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		060E9B9D24F4961B00D9A59B /* Network Dependency Provider */ = {
+			isa = PBXGroup;
+			children = (
+				060E9B9E24F4964100D9A59B /* NetworkDependencyProvider.swift */,
+			);
+			path = "Network Dependency Provider";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 				060E9B6C24F4902000D9A59B /* AppDelegate.swift in Sources */,
 				060E9B6E24F4902000D9A59B /* SceneDelegate.swift in Sources */,
 				060E9B9A24F4930500D9A59B /* BaseRouter.swift in Sources */,
+				060E9B9F24F4964100D9A59B /* NetworkDependencyProvider.swift in Sources */,
 				060E9B9C24F4938F00D9A59B /* QuizDataFetchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
