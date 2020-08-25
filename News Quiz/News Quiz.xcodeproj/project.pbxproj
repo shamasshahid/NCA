@@ -16,6 +16,10 @@
 		060E9B8324F4902300D9A59B /* News_QuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B8224F4902300D9A59B /* News_QuizTests.swift */; };
 		060E9B9224F491A500D9A59B /* QuizResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9124F491A500D9A59B /* QuizResponse.swift */; };
 		060E9B9424F491D200D9A59B /* QuizItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9324F491D200D9A59B /* QuizItem.swift */; };
+		060E9B9624F492BC00D9A59B /* Routable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9524F492BC00D9A59B /* Routable.swift */; };
+		060E9B9824F492D900D9A59B /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9724F492D900D9A59B /* WebService.swift */; };
+		060E9B9A24F4930500D9A59B /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9924F4930500D9A59B /* BaseRouter.swift */; };
+		060E9B9C24F4938F00D9A59B /* QuizDataFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E9B9B24F4938F00D9A59B /* QuizDataFetchService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		060E9B8424F4902300D9A59B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		060E9B9124F491A500D9A59B /* QuizResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResponse.swift; sourceTree = "<group>"; };
 		060E9B9324F491D200D9A59B /* QuizItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizItem.swift; sourceTree = "<group>"; };
+		060E9B9524F492BC00D9A59B /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		060E9B9724F492D900D9A59B /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		060E9B9924F4930500D9A59B /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		060E9B9B24F4938F00D9A59B /* QuizDataFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataFetchService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,10 @@
 		060E9B8E24F490F800D9A59B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				060E9B9524F492BC00D9A59B /* Routable.swift */,
+				060E9B9724F492D900D9A59B /* WebService.swift */,
+				060E9B9924F4930500D9A59B /* BaseRouter.swift */,
+				060E9B9B24F4938F00D9A59B /* QuizDataFetchService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -239,10 +251,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				060E9B9424F491D200D9A59B /* QuizItem.swift in Sources */,
+				060E9B9624F492BC00D9A59B /* Routable.swift in Sources */,
+				060E9B9824F492D900D9A59B /* WebService.swift in Sources */,
 				060E9B7024F4902000D9A59B /* ViewController.swift in Sources */,
 				060E9B9224F491A500D9A59B /* QuizResponse.swift in Sources */,
 				060E9B6C24F4902000D9A59B /* AppDelegate.swift in Sources */,
 				060E9B6E24F4902000D9A59B /* SceneDelegate.swift in Sources */,
+				060E9B9A24F4930500D9A59B /* BaseRouter.swift in Sources */,
+				060E9B9C24F4938F00D9A59B /* QuizDataFetchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
