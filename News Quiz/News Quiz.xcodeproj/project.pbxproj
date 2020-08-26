@@ -217,8 +217,8 @@
 			children = (
 				060E9BA224F49FD500D9A59B /* QuizView */,
 				060E9BA124F4979500D9A59B /* QuestionView */,
-				0660FB7124F507E400A93E11 /* NewsArticleView */,
 				0660FB6C24F4DECE00A93E11 /* ResultView */,
+				0660FB7124F507E400A93E11 /* NewsArticleView */,
 			);
 			path = Views;
 			sourceTree = "<group>";

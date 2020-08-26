@@ -20,5 +20,4 @@ class NewsArticleViewModel {
         
         return URL(string: quizItem.storyURL)
     }
-    
 }

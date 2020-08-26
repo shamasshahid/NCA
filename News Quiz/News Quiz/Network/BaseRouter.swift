@@ -11,6 +11,11 @@ import Foundation
 /// Implements Routable protocol and is used to get the urlRequest
 struct BaseRouter: Routable {
     
+    let altQueryKey = "alt"
+    let altQueryValue = "media"
+    let tokenQueryKey = "token"
+    let tokenQueryValue = "e36c1a14-25d9-4467-8383-a53f57ba6bfe"
+    
     var methodType: HTTPType {
         return .GET
     }
@@ -28,8 +33,8 @@ struct BaseRouter: Routable {
     }
     
     var queryItems: [URLQueryItem] {
-        return [URLQueryItem(name: "alt", value: "media"),
-                URLQueryItem(name: "token", value: "e36c1a14-25d9-4467-8383-a53f57ba6bfe")]
+        return [URLQueryItem(name: altQueryKey, value: altQueryValue),
+                URLQueryItem(name: tokenQueryKey, value: tokenQueryValue)]
     }
     
     var headers: [String : Any] {

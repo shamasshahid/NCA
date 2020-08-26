@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/// DependencyProvider is used to do tie up between views and their viewmodels.
+/// It creates `QuestionViewController`, assigns it its viewmodel and returns it
 class DependencyProvider {
     
     static func getQuestionViewController() -> QuestionViewController? {
@@ -22,6 +24,8 @@ class DependencyProvider {
         return vc
     }
     
+    /// Creates `QuizViewModel` with `NetworkDependencyProvider` and returns
+    /// - Returns: QuizViewModel
     static func getQuizViewModel() -> QuizViewModel {
         return QuizViewModel(provider: NetworkDependencyProvider())
     }

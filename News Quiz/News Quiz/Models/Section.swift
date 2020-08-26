@@ -9,8 +9,8 @@
 import Foundation
 
 enum Section: String, Codable {
-    case business // = "business" // todo
-    case entertainment // = "entertainment"
-    case lifestyle // = "lifestyle"
-    case sport // = "sport"
+    case business
+    case entertainment
+    case lifestyle
+    case sport
 }

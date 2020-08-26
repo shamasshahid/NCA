@@ -45,11 +45,15 @@ class QuestionViewController: UIViewController {
         
         viewModel.onQuestionUpdated = { [weak self] in
             DispatchQueue.main.async {
-                self?.imageView.kf.setImage(with: self?.viewModel.getImageURL())
-                [self?.answerButton1, self?.answerButton2, self?.answerButton3].forEach { button in
-                    button?.setTitle(self?.viewModel.getOptionTitleFor(index: button?.tag ?? 0) ?? "---", for: .normal)
-                }
+                self?.updateView()
             }
+        }
+    }
+    
+    func updateView() {
+        imageView.kf.setImage(with: viewModel.getImageURL())
+        [answerButton1, answerButton2, answerButton3].forEach { (button) in
+            button?.setTitle(viewModel.getOptionTitleFor(index: button?.tag ?? 0), for: .normal)
         }
     }
     

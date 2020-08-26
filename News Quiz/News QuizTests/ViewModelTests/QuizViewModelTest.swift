@@ -17,6 +17,7 @@ class QuizViewModelTest: XCTestCase {
     override func setUpWithError() throws {
         
         viewModel = QuizViewModel(provider: MockNetworkDependencyProvider())
+        viewModel.loadQuizData()
     }
 
     override func tearDownWithError() throws {
@@ -35,7 +36,7 @@ class QuizViewModelTest: XCTestCase {
         
         let expectationProgress = XCTestExpectation(description: "Progress should increase")
         viewModel.onProgressUpdated = { progress in
-            XCTAssertEqual(progress, 1 / 3)
+            XCTAssertEqual(progress, 2 / 3)
             expectationProgress.fulfill()
         }
         
@@ -45,16 +46,18 @@ class QuizViewModelTest: XCTestCase {
             expectationScoreChange.fulfill()
         }
         viewModel.updateScoreForAnswer(isCorrect: true)
+        let resultVM = viewModel.getResultViewModel()
+        resultVM?.onNextQuestionRequested()
         wait(for: [expectationProgress, expectationScoreChange], timeout: 5)
         
     }
     
     func testGetResultViewModel() throws {
         
-        viewModel.loadQuizData()
-        viewModel.updateScoreForAnswer(isCorrect: false)
+//        viewModel.loadQuizData()
+        viewModel.updateScoreForAnswer(isCorrect: true)
         let resultViewModel = viewModel.getResultViewModel()
-        XCTAssertEqual(resultViewModel?.isCorrect,  false)
+        XCTAssertEqual(resultViewModel?.isCorrect,  true)
     }
     
     func testSkipRequested() throws {
