@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 /// DependencyProvider is used to do tie up between views and their viewmodels.
-/// It creates `QuestionViewController`, assigns it its viewmodel and returns it
 class DependencyProvider {
     
+    /// It creates `QuestionViewController`, assigns it its viewmodel and returns it
     static func getQuestionViewController() -> QuestionViewController? {
         
         guard let vc = UIViewController.instantiateFromStoryBoard(identifier: QuestionViewController.storyboardIdentifier, type: DependencyProvider.self) as? QuestionViewController else {

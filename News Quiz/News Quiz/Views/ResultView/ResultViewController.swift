@@ -24,6 +24,19 @@ class ResultViewController: UIViewController {
         setupUI()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let newsArticleVC = segue.destination as? NewsArticleViewController {
+            newsArticleVC.viewModel = viewModel.getNewsArticleViewModel()
+        }
+    }
+    
+    @IBAction func nextQuestionTapped(_ sender: UIButton) {
+        
+        viewModel.onNextQuestionRequested()
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    
     func setupUI() {
         
         resultLabel.text = viewModel.getResultLabelMessage()
@@ -39,16 +52,6 @@ class ResultViewController: UIViewController {
         quizImageView.kf.setImage(with: viewModel.getImageURL())
     }
     
-    @IBAction func nextQuestionTapped(_ sender: UIButton) {
-        
-        viewModel.onNextQuestionRequested()
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let newsArticleVC = segue.destination as? NewsArticleViewController {
-            newsArticleVC.viewModel = viewModel.getNewsArticleViewModel()
-        }
-    }
     
 }

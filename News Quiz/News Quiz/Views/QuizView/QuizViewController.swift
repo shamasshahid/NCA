@@ -33,6 +33,27 @@ class QuizViewController: UIViewController {
         setupViewModel()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupQuizItemView()
+        setupFirstLoadUI()
+        viewModel.loadQuizData()
+    }
+    
+    @IBAction func retryButtonTapped(_ sender: UIButton) {
+        viewModel.loadQuizData()
+    }
+    
+    @IBAction func skipButtonTapped(_ sender: UIButton) {
+        viewModel.skipRequested()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let resultVC = segue.destination as? ResultViewController {
+            resultVC.viewModel = viewModel.getResultViewModel()
+        }
+    }
+    
     func setupViewModel() {
         viewModel = DependencyProvider.getQuizViewModel()
         viewModel.onScoreUpdated = { [weak self]  score in
@@ -67,13 +88,6 @@ class QuizViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupQuizItemView()
-        setupFirstLoadUI()
-        viewModel.loadQuizData()
-    }
-    
     func setupQuizItemView() {
         
         if let vc = DependencyProvider.getQuestionViewController() {
@@ -100,13 +114,7 @@ class QuizViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func retryButtonTapped(_ sender: UIButton) {
-        viewModel.loadQuizData()
-    }
     
-    @IBAction func skipButtonTapped(_ sender: UIButton) {
-        viewModel.skipRequested()
-    }
     
     func updateViewForDataFetchState(state: DataFetchState) {
         switch state {
@@ -132,11 +140,7 @@ class QuizViewController: UIViewController {
         self.performSegue(withIdentifier: resultSegue, sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let resultVC = segue.destination as? ResultViewController {
-            resultVC.viewModel = viewModel.getResultViewModel()
-        }
-    }
+    
 
 }
 

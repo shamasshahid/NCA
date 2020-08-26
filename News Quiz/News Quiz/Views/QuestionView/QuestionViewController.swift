@@ -33,6 +33,10 @@ class QuestionViewController: UIViewController {
         setupView()
     }
     
+    @IBAction func answerButtonTapped(_ sender: UIButton) {
+           viewModel.userSelectedAnswerIndex(index: sender.tag)
+       }
+    
     func setupView() {
         [answerButton1, answerButton2, answerButton3].forEach { button in
             button?.titleLabel?.textAlignment = .center
@@ -57,8 +61,6 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    @IBAction func answerButtonTapped(_ sender: UIButton) {
-        viewModel.userSelectedAnswerIndex(index: sender.tag)
-    }
+   
 
 }

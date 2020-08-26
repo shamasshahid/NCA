@@ -222,9 +222,7 @@
                                 </constraints>
                                 <state key="normal" title="Read Article  &gt;"/>
                                 <connections>
-                                    <segue destination="tpY-nh-2rV" kind="popoverPresentation" popoverAnchorView="3H2-Hb-6h8" id="QjS-qx-Ixv">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="tpY-nh-2rV" kind="presentation" id="QjS-qx-Ixv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ae-F7-ria">
