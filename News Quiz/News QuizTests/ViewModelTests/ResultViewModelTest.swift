@@ -36,6 +36,10 @@ class ResultViewModelTest: XCTestCase {
         }
         viewModel.onNextQuestionRequested()
         wait(for: [expectation], timeout: 5)
+        
+        let newsArticleVM = viewModel.getNewsArticleViewModel()
+        XCTAssertNotNil(newsArticleVM)
     }
+    
 
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Data Fetch State
 enum DataFetchState {
     case isFetching
     case isSuccessful
@@ -17,7 +18,12 @@ enum DataFetchState {
 class QuizViewModel {
     
     private let dependencyProvider: NetworkDependencies
-    private var currentIndex: Int = 0
+    // current Index of the question being sked
+    private var currentIndex: Int = 0 {
+        didSet {
+            onProgressUpdated?(getCurrentProgress())
+        }
+    }
     private let scoreKeeper = ScoreKeeper()
     private var wasLastResponseCorrect: Bool = false
     private var dataFetchState: DataFetchState = .isFetching {
@@ -28,6 +34,7 @@ class QuizViewModel {
     
     private var quizData: [QuizItem] = [] {
         didSet {
+            currentIndex = 0
             if let question = getItemForCurrentIndex() {
                 onQuestionSet?(question)
             }
@@ -35,11 +42,17 @@ class QuizViewModel {
         }
     }
     
+    // call back for the view to update the score
     var onScoreUpdated: ((String) -> Void)?
+    // call back for the view to update the progress
     var onProgressUpdated: ((Float) -> Void)?
+    // call back for the view show Result View
     var onShowResult: (() -> Void)?
+    // call back for the view handle data fetch states
     var onDataFetchStateChanged: ((DataFetchState) -> Void)?
+    // call back for the QuestionViewModel to update to new question
     var onQuestionSet: ((QuizItem) -> Void)?
+    var onGameEnd: ((String) -> Void)?
     
     init(provider: NetworkDependencies) {
         dependencyProvider = provider
@@ -49,11 +62,12 @@ class QuizViewModel {
         wasLastResponseCorrect = isCorrect
         scoreKeeper.answerSelected(isCorrect: isCorrect)
         onScoreUpdated?("\(scoreKeeper.score)")
-        onProgressUpdated?(getCurrentProgress())
+//        onProgressUpdated?(getCurrentProgress())
         onShowResult?()
     }
     
     private func getCurrentProgress() -> Float {
+        // sanity check to prevent division by zero
         guard quizData.count > 0 else {
             return 0
         }
@@ -63,7 +77,7 @@ class QuizViewModel {
     private func setNextQuestionIfAvailable() {
         currentIndex += 1
         guard let question = getItemForCurrentIndex() else {
-            // handle end of game
+            onGameEnd?("\(scoreKeeper.score)")
             return
         }
         
@@ -74,6 +88,7 @@ class QuizViewModel {
         dataFetchState = .isFetching
         let service = dependencyProvider.getService()
         let router = dependencyProvider.getRoutable()
+        currentIndex = 0
         service.fetch(urlRequest: router) {[weak self] (result) in
             switch result {
             case .success(let response):
@@ -87,7 +102,6 @@ class QuizViewModel {
     
     func skipRequested() {
         setNextQuestionIfAvailable()
-        onProgressUpdated?(getCurrentProgress())
     }
     
     private func getItemForCurrentIndex() -> QuizItem? {

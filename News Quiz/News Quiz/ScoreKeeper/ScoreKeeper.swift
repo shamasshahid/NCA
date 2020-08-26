@@ -8,10 +8,13 @@
 
 import Foundation
 
+/// `ScoreKeeper` is a light weight class that keeps track of the score
 class ScoreKeeper {
     
     var score: Int = 0
     
+    /// Used when an answer/outcome has come through
+    /// - Parameter isCorrect: Bool whether the answer is correct or not
     func answerSelected(isCorrect: Bool) {
         score += isCorrect ? 2 : -1
     }

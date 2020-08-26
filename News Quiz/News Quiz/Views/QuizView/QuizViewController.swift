@@ -22,6 +22,9 @@ class QuizViewController: UIViewController {
     
     let scoreMessge = "Your current score is %@"
     let resultSegue = "resultIdentifier"
+    let gameEnded = "Game Ended"
+    let gameEndMessage = "Game ended. Your score was %@"
+    let restart = "Restart"
     
     var viewModel: QuizViewModel!
     
@@ -41,7 +44,9 @@ class QuizViewController: UIViewController {
         }
         
         viewModel.onProgressUpdated = { [weak self] progress in
-            self?.progressBar.progress = progress
+            DispatchQueue.main.async {
+                self?.progressBar.progress = progress
+            }
         }
         
         viewModel.onShowResult = { [weak self] in
@@ -55,6 +60,10 @@ class QuizViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.updateViewForDataFetchState(state: state)
             }
+        }
+        
+        viewModel.onGameEnd = { [weak self] score in
+            self?.showGameEndedPrompt(score: score)
         }
     }
     
@@ -82,6 +91,14 @@ class QuizViewController: UIViewController {
         skipButton.clipsToBounds = true
     }
 
+    func showGameEndedPrompt(score: String) {
+        let message = String(format: gameEndMessage, score)
+        let alertController = UIAlertController(title: gameEnded, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: restart, style: .default, handler: { (alert) in
+            self.viewModel.loadQuizData()
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
     
     @IBAction func retryButtonTapped(_ sender: UIButton) {
         viewModel.loadQuizData()
@@ -93,17 +110,17 @@ class QuizViewController: UIViewController {
     
     func updateViewForDataFetchState(state: DataFetchState) {
         switch state {
-        case .isFetching:
+        case .isFetching: // show spinner
             failedToConnectLabel.isHidden = true
             retryButton.isHidden = true
             activityIndicator.startAnimating()
             overLayView.isHidden = false
-        case .isSuccessful:
+        case .isSuccessful: // hide loading elements
             activityIndicator.stopAnimating()
             retryButton.isHidden = true
             failedToConnectLabel.isHidden = true
             overLayView.isHidden = true
-        case .isFailed:
+        case .isFailed: // show retry elements
             activityIndicator.stopAnimating()
             retryButton.isHidden = false
             failedToConnectLabel.isHidden = false
