@@ -14,11 +14,12 @@ enum RoutableScheme: String {
     case http
 }
 
-/// Routable conversion error
+/// Routable  error
 enum RouteError: Error {
     case invalidRoute
 }
 
+/// HTTP request type
 enum HTTPType : String {
     case GET
     case POST

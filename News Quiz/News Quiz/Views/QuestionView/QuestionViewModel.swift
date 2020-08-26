@@ -15,6 +15,7 @@ class QuestionViewModel {
             onQuestionUpdated?()
         }
     }
+    
     // call back for the view when new question is set
     var onQuestionUpdated: (() -> Void)?
     // callback for when the user has selected an option

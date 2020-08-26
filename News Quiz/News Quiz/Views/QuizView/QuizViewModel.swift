@@ -18,14 +18,16 @@ enum DataFetchState {
 class QuizViewModel {
     
     private let dependencyProvider: NetworkDependencies
+    private let scoreKeeper = ScoreKeeper()
+    private var wasLastResponseCorrect: Bool = false
+    
     // current Index of the question being sked
     private var currentIndex: Int = 0 {
         didSet {
             onProgressUpdated?(getCurrentProgress())
         }
     }
-    private let scoreKeeper = ScoreKeeper()
-    private var wasLastResponseCorrect: Bool = false
+    
     private var dataFetchState: DataFetchState = .isFetching {
         didSet {
             onDataFetchStateChanged?(dataFetchState)
@@ -44,12 +46,16 @@ class QuizViewModel {
     
     // call back for the view to update the score
     var onScoreUpdated: ((String) -> Void)?
+    
     // call back for the view to update the progress
     var onProgressUpdated: ((Float) -> Void)?
+    
     // call back for the view show Result View
     var onShowResult: (() -> Void)?
+    
     // call back for the view handle data fetch states
     var onDataFetchStateChanged: ((DataFetchState) -> Void)?
+    
     // call back for the QuestionViewModel to update to new question
     var onQuestionSet: ((QuizItem) -> Void)?
     var onGameEnd: ((String) -> Void)?
@@ -62,7 +68,6 @@ class QuizViewModel {
         wasLastResponseCorrect = isCorrect
         scoreKeeper.answerSelected(isCorrect: isCorrect)
         onScoreUpdated?("\(scoreKeeper.score)")
-//        onProgressUpdated?(getCurrentProgress())
         onShowResult?()
     }
     
@@ -88,6 +93,7 @@ class QuizViewModel {
         dataFetchState = .isFetching
         let service = dependencyProvider.getService()
         let router = dependencyProvider.getRoutable()
+        
         currentIndex = 0
         service.fetch(urlRequest: router) {[weak self] (result) in
             switch result {

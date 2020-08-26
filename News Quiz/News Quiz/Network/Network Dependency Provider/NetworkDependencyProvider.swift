@@ -14,7 +14,7 @@ protocol NetworkDependencies {
     func getRoutable() -> Routable
 }
 
-/// Implementation for ConverterDependencies which returns WebService, and Routable
+/// Implementation for NetworkDependencies which returns WebService, and Routable
 class NetworkDependencyProvider: NetworkDependencies {
     
     func getService() -> WebService {

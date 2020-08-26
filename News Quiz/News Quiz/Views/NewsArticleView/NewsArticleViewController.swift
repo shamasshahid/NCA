@@ -13,6 +13,7 @@ import WebKit
 class NewsArticleViewController: UIViewController {
 
     var viewModel: NewsArticleViewModel!
+    
     @IBOutlet weak var wkWebView: WKWebView!
     
     override func viewDidLoad() {
